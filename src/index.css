@@ -1,0 +1,15 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.main{
+  width: 100%;
+}
+
+
+.btn{
+  padding: 5px;
+  margin: 5px;
+}

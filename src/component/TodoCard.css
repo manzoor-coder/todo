@@ -1,0 +1,191 @@
+.todo-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 550px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fafafa;
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #bdbdbd;
+    position: relative;
+}
+
+.input_field {
+    padding: 10px 5px;
+    margin-right: 5px;
+    width: 85%;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+}
+.input_field:focus{
+    outline: none;
+}
+
+.list_name {
+    list-style: none;
+    padding: 0;
+}
+
+.heading{
+    margin-bottom: 30px;
+    color: #304ffe;
+}
+
+.lists {
+    padding: 5px;
+    background-color: #f5f5f5;
+    list-style: none;
+    text-align: start;
+    font-size: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+
+.add_btn {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: rgb(14, 14, 140);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.del_btn {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: red;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.edit_btn {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: rgb(26, 118, 26);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.update_btn {
+    padding: 10px;
+    background-color: rgb(140, 14, 136);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn_div{
+    display: flex;
+}
+
+.check{
+    width: 20px;
+    background-color: #304ffe!important;
+}
+
+/* Model styling */
+
+
+
+.time_title{
+    font-size: 25px;
+}
+
+.modal {
+    width: 230px;
+    background-color: #9e9e9e;
+    height: 230px;
+    border-radius: 5px;
+    padding: 20px;
+    position: absolute;
+    top: 5%;
+    right: 30.82%;
+}
+
+.add_time{
+    padding: 10px 5px;
+    width: 70%;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    border: none;
+}
+.add_time:focus{
+    outline: none;
+}
+
+.sub_btn{
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: aqua;
+    margin-left: 5px;
+    margin: 0 8px;
+}
+
+.ignore_btn{
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #97efaa;
+    margin-left: 5px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .logout{
+    position: absolute!important;
+    right: 5%;
+    top: 5%;
+   }
+*/
+
+.profile-lay{
+    display: flex;
+    justify-content: space-around;
+}
+
+.user_image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.sub_btn2 {
+    float: right;
+    margin-top: 20px;
+}
+
+.profile_title{
+    text-align: center;
+    font-size: 25px;
+}
+
+.img_container{
+    display: flex;
+    justify-content: center;
+}
+
+.email_para{
+    margin: 0;
+    color: rgb(60, 58, 58);
+}
