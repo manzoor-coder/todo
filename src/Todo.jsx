@@ -244,6 +244,8 @@ function Todo() {
     setInputVal("");
     fetchApi();
   }
+  
+
 
   // Delete todo item
   const Delete = async (id) => {
@@ -298,6 +300,7 @@ function Todo() {
     setAnchorEl(null);
     setProfileModel(true)
   }
+  
 
   // Profile modal handling 
   const handleProfileModal = () => {
@@ -484,6 +487,7 @@ useEffect(() => {
                 {user && <p className="email_para">{userData.email}</p>}
               </div>
             </div>
+            
           </div>
       )
       }
