@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { collection, addDoc, deleteDoc, doc, query, getDocs, where, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./config/firebase_config";
@@ -14,12 +14,18 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditDocumentIcon from '@mui/icons-material/EditDocument';
 import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
 import Tooltip from "@mui/material/Tooltip";
-import Fab from '@mui/material/Fab';
-import Register from "./component/auth/Register";
 import Person2Icon from '@mui/icons-material/Person2';
 import { useNavigate } from "react-router-dom";
 import { Authcontext } from "./context/Authcontext";
 import { useContext } from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Box,
+  Typography,
+} from '@mui/material';
 
 
 
@@ -48,14 +54,14 @@ function Todo() {
 
   const { user, logOut } = useContext(Authcontext);
 
-  
+
 
   useEffect(() => {
     setUserData(user);
   }, [])
 
-  console.log("new user : ",user);
-  
+  console.log("new user : ", user);
+
 
   // useEffect(() => {
   //   const Token = localStorage.getItem("authToken");
@@ -140,7 +146,7 @@ function Todo() {
       setEditingId(null);
 
     } catch (error) {
-      console.log("Error in updating task.");
+      console.log("Error in updating task.", error);
     }
     fetchTask();
   }
@@ -226,32 +232,8 @@ function Todo() {
   }, [checkedTodos, totaltime]);
 
 
-  // fetching api function 
-  const fetchApi = async () => {
-    const res = await axios.get(API);
-    setTodos(res.data);
-  }
-
-  // useEffect(() => {
-  //   fetchApi();
-  // }, [])
-
-  // Add todo items
-  const AddTodo = async () => {
-    if (inputVal.trim() === "") return;
-    const newTodo = { title: inputVal, status: false };
-    await axios.post(API, newTodo);
-    setInputVal("");
-    fetchApi();
-  }
-  
 
 
-  // Delete todo item
-  const Delete = async (id) => {
-    await axios.delete(`${API}/${id}`);
-    fetchApi();
-  };
 
 
 
@@ -269,18 +251,6 @@ function Todo() {
   }
 
 
-  const openModal = (id) => {
-    setActiveTodoId(id);
-    setShowModel(true);
-  };
-
-  // const logOut = async () => {
-  //   try {
-  //     await signOut(auth);
-  //   } catch (error) {
-  //     console.error("Failed to log out:", error);
-  //   }
-  // };
 
 
   const logIn = () => {
@@ -300,15 +270,15 @@ function Todo() {
     setAnchorEl(null);
     setProfileModel(true)
   }
-  
+
 
   // Profile modal handling 
   const handleProfileModal = () => {
     setProfileModel(false)
   }
 
-useEffect(() => {
-   const handleClickOutside = (event) => {
+  useEffect(() => {
+    const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setProfileModel(false);
       }
@@ -461,36 +431,57 @@ useEffect(() => {
 
 
 
-      {showModel && (
-        <div className="main_div">
-          <div className="modal">
-            <h3 className="time_title">Want to take some more time</h3>
-            <input className="add_time"
-              type="number"
-              onChange={(e) => setExtraTime(Number(e.target.value))}
+      <Dialog open={showModel} onClose={() => hideModel(activeTodoId)}>
+        <DialogTitle>Want to take some more time?</DialogTitle>
+
+        <DialogContent>
+          <TextField
+            type="number"
+            label="Add Extra Time"
+            variant="outlined"
+            fullWidth
+            margin="dense"
+            onChange={(e) => setExtraTime(Number(e.target.value))}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => handleTimeChange(activeTodoId)}
+          >
+            Save
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => hideModel(activeTodoId)}
+          >
+            NO
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+      <Dialog open={profileModel} onClose={() => setProfileModel(false)} ref={modalRef}>
+        <DialogTitle>Profile</DialogTitle>
+
+        <DialogContent>
+          <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+            <Avatar
+              src={user?.imageUrl}
+              alt="Profile"
+              sx={{ width: 100, height: 100 }}
             />
-            <Button variant="contained" color="success" className="sub_btn" onClick={() => handleTimeChange(activeTodoId)} sx={{ margin: '0 8px' }}>Save</Button>
-            <Button variant="contained" color="error" className="ignore_btn" onClick={() => hideModel(activeTodoId)}>NO</Button>
-          </div>
-        </div>
-      )
-      }
-
-
-      {/* profile  */}
-      {profileModel && (
-          <div className="modal" ref={modalRef}>
-            <h3 className="profile_title">Profile Model</h3>
-            <div className="img_container">
-              <div className="user_image">
-                <Avatar src={user?.imageUrl} alt="Profile" sx={{ width: '100%', height: '100%' }} />
-                {user && <p className="email_para">{userData.email}</p>}
-              </div>
-            </div>
-            
-          </div>
-      )
-      }
+            {user && (
+              <Typography variant="body1" color="textSecondary">
+                {user?.email}
+              </Typography>
+            )}
+          </Box>
+        </DialogContent>
+      </Dialog>
 
     </>
   );
